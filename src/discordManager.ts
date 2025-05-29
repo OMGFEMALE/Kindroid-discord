@@ -202,6 +202,11 @@ async function createDiscordClientForBot(
       if (aiResult.type === "rate_limited") {
         return;
       }
+ // If it's in a thread, respond
+  if (message.channel.isThread()) {
+    console.log(`Thread message received: ${message.content}`);
+    await message.channel.send(aiResult.reply);
+  }
 
       // If it was a mention, reply to the message. Otherwise, send as normal message
       if (isMentioned) {
