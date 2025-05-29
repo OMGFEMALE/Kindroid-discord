@@ -180,6 +180,8 @@ async function createDiscordClientForBot(
       if (
         message.channel instanceof BaseGuildTextChannel ||
         message.channel instanceof DMChannel
+        message.channel instanceof PUBLIC_THREAD
+        message.channel instanceof GUILD_PRIVATE_THREAD
       ) {
         await message.channel.sendTyping();
       }
