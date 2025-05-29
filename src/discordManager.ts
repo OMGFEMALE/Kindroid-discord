@@ -177,14 +177,14 @@ async function createDiscordClientForBot(
 
     try {
       // Show typing indicator
-      if (
-        message.channel instanceof BaseGuildTextChannel ||
-        message.channel instanceof DMChannel
-        message.channel instanceof PUBLIC_THREAD
-        message.channel instanceof GUILD_PRIVATE_THREAD
-      ) {
-        await message.channel.sendTyping();
-      }
+if (
+  message.channel instanceof BaseGuildTextChannel ||  // Normal text channel
+  message.channel instanceof DMChannel ||              // DM channel
+  message.channel.type === ChannelType.PublicThread || // Public thread
+  message.channel.type === ChannelType.PrivateThread   // Private thread
+) {
+  await message.channel.sendTyping();
+}
 
       // Fetch recent conversation with caching
       const conversationArray = await ephemeralFetchConversation(
